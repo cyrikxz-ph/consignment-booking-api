@@ -1,0 +1,156 @@
+{
+  "name": "company",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "protected": [
+    "apiKey"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "contactPerson": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "addressLine1": {
+      "type": "string",
+      "required": true
+    },
+    "addressLine2": {
+      "type": "string"
+    },
+    "addressLine3": {
+      "type": "string"
+    },
+    "suburb": {
+      "type": "string",
+      "required": true
+    },
+    "postCode": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true,
+      "default": "AU"
+    },
+    "senderAddressUseCompanyAddr": {
+      "type": "boolean",
+      "default": true
+    },
+    "senderAddressPhone": {
+      "type": "string"
+    },
+    "senderAddressEmail": {
+      "type": "string"
+    },
+    "senderAddressSuburb": {
+      "type": "string"
+    },
+    "senderAddressPostCode": {
+      "type": "string"
+    },
+    "returnAddressUseCourier": {
+      "type": "boolean",
+      "default": true
+    },
+    "returnAddressContactPerson": {
+      "type": "string"
+    },
+    "returnAddressPhone": {
+      "type": "string"
+    },
+    "returnAddressEmail": {
+      "type": "string"
+    },
+    "returnAddressSuburb": {
+      "type": "string"
+    },
+    "returnAddressPostCode": {
+      "type": "string"
+    },
+    "returnAddressState": {
+      "type": "string"
+    },
+    "parentId": {
+      "type": "string"
+    },
+    "allowedManifest": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifyOnCreate": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifyOnManifest": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifyOnDeliveryRoute": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifyOnDelivered": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifyOnCarded": {
+      "type": "boolean",
+      "default": false
+    },
+    "apiKey": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "companyId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

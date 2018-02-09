@@ -1,0 +1,36 @@
+{
+  "name": "postCode",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {
+    "order": "code",
+    "limit": 10,
+    "where": {
+      "active": true
+    }
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "suburbs": {
+      "type": "hasMany",
+      "model": "suburb",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

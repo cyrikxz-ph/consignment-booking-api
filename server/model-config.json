@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "user": {
+    "dataSource": "mongoDS"
+  },
+  "AccessToken": {
+    "dataSource": "mongoDS",
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "ACL": {
+    "dataSource": "mongoDS",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDS",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "company": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "userProfile": {
+    "dataSource": "mongoDS",
+    "public": false
+  },
+  "postCode": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "suburb": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "state": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "packageType": {
+    "dataSource": "mongoDS",
+    "public": true
+  }
+}

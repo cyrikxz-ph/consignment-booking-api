@@ -1,0 +1,35 @@
+{
+  "name": "suburb",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "suburb_postcode_state_index": {
+      "keys": {
+        "name": 1,
+        "postCodeId": 1,
+        "stateId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
