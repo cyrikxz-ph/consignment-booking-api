@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  mysqlDS: {
+  mongoDS: {
     connector: 'mongodb',
     hostname: process.env.DB_HOSTNAME,
     url: '',
