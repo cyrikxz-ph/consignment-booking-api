@@ -2,6 +2,7 @@
 
 module.exports = {
   mongoDS: {
+    name: 'mongoDS',
     connector: 'mongodb',
     hostname: process.env.DB_HOSTNAME,
     url: '',
