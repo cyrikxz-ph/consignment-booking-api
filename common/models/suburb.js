@@ -30,97 +30,97 @@ module.exports = function(Suburb) {
   Suburb.disableRemoteMethodByName('replaceOrCreate');
   Suburb.disableRemoteMethodByName('upsertWithWhere');
 
-  Suburb.observe('before save', function(ctx, next) {
-    // Validate Poll input structure on create
-    const PostCode = app.models.PostCode;
-    const State = app.models.State;
-    if (ctx.isNewInstance) {
-      if (!ctx.instance.postCode) {
-        next({
-          statusCode: 400,
-          name: 'Bad Request',
-          message: 'The `suburb` instance is not valid. Details: `postCode` can\'t be empty or blank (value: ' + ctx.instance.postCode + ').',
-        });
-      } else if (!ctx.instance.state) {
-        next({
-          statusCode: 400,
-          name: 'Bad Request',
-          message: 'The `suburb` instance is not valid. Details: `state` can\'t be empty or blank (value: ' + ctx.instance.state + ').',
-        });
-      } else {
-        PostCode.findOne({where: {code: ctx.instance.postCode}})
-          .then(function(postcode) {
-            if (postcode) {
-              ctx.instance.postCodeId = postcode.id;
-              return State.findOne({where: {code: ctx.instance.state}});
-            } else {
-              return Promise.reject({
-                code: 400,
-                type: 'Bad Request', message: `postCode ${ctx.instance.postCode} does not exists`,
-              });
-            }
-          })
-          .then(function(state) {
-            if (state) {
-              ctx.instance.stateId = state.id;
-              ctx.instance.unsetAttribute('postCode');
-              ctx.instance.unsetAttribute('state');
-              next();
-            } else {
-              return Promise.reject({code: 400, type: 'Bad Request', message: `state ${ctx.instance.state} does not exists`});
-            }
-          })
-          .catch(function(e) {
-            next({
-              statusCode: e.code || '500',
-              name: e.type || 'Internal Error',
-              message: `${e.message}`,
-            });
-          });
-      }
-    } else {
-      if (!ctx.data.postCode) {
-        next({
-          statusCode: 400,
-          name: 'Bad Request',
-          message: 'The `suburb` instance is not valid. Details: `postCode` can\'t be empty or blank (value: ' + ctx.data.postCode + ').',
-        });
-      } else if (!ctx.data.state) {
-        next({
-          statusCode: 400,
-          name: 'Bad Request',
-          message: 'The `suburb` instance is not valid. Details: `state` can\'t be empty or blank (value: ' + ctx.data.state + ').',
-        });
-      } else {
-        PostCode.findOne({where: {code: ctx.data.postCode}})
-          .then(function(postcode) {
-            if (postcode) {
-              ctx.data.postCodeId = postcode.id;
-              return State.findOne({where: {code: ctx.data.state}});
-            } else {
-              return Promise.reject({code: 400, type: 'Bad Request', message: `postCode ${ctx.data.postCode} does not exists`});
-            }
-          })
-          .then(function(state) {
-            if (state) {
-              ctx.data.stateId = state.id;
-              delete ctx.data.postCode;
-              delete ctx.data.state;
-              next();
-            } else {
-              return Promise.reject({code: 400, type: 'Bad Request', message: `state ${ctx.data.state} does not exists`});
-            }
-          })
-          .catch(function(e) {
-            next({
-              statusCode: e.code || '500',
-              name: e.type || 'Internal Error',
-              message: `${e.message}`,
-            });
-          });
-      }
-    }
-  });
+  // Suburb.observe('before save', function(ctx, next) {
+  //   // Validate Poll input structure on create
+  //   const PostCode = app.models.PostCode;
+  //   const State = app.models.State;
+  //   if (ctx.isNewInstance) {
+  //     if (!ctx.instance.postCode) {
+  //       next({
+  //         statusCode: 400,
+  //         name: 'Bad Request',
+  //         message: 'The `suburb` instance is not valid. Details: `postCode` can\'t be empty or blank (value: ' + ctx.instance.postCode + ').',
+  //       });
+  //     } else if (!ctx.instance.state) {
+  //       next({
+  //         statusCode: 400,
+  //         name: 'Bad Request',
+  //         message: 'The `suburb` instance is not valid. Details: `state` can\'t be empty or blank (value: ' + ctx.instance.state + ').',
+  //       });
+  //     } else {
+  //       PostCode.findOne({where: {code: ctx.instance.postCode}})
+  //         .then(function(postcode) {
+  //           if (postcode) {
+  //             ctx.instance.postCodeId = postcode.id;
+  //             return State.findOne({where: {code: ctx.instance.state}});
+  //           } else {
+  //             return Promise.reject({
+  //               code: 400,
+  //               type: 'Bad Request', message: `postCode ${ctx.instance.postCode} does not exists`,
+  //             });
+  //           }
+  //         })
+  //         .then(function(state) {
+  //           if (state) {
+  //             ctx.instance.stateId = state.id;
+  //             ctx.instance.unsetAttribute('postCode');
+  //             ctx.instance.unsetAttribute('state');
+  //             next();
+  //           } else {
+  //             return Promise.reject({code: 400, type: 'Bad Request', message: `state ${ctx.instance.state} does not exists`});
+  //           }
+  //         })
+  //         .catch(function(e) {
+  //           next({
+  //             statusCode: e.code || '500',
+  //             name: e.type || 'Internal Error',
+  //             message: `${e.message}`,
+  //           });
+  //         });
+  //     }
+  //   } else {
+  //     if (!ctx.data.postCode) {
+  //       next({
+  //         statusCode: 400,
+  //         name: 'Bad Request',
+  //         message: 'The `suburb` instance is not valid. Details: `postCode` can\'t be empty or blank (value: ' + ctx.data.postCode + ').',
+  //       });
+  //     } else if (!ctx.data.state) {
+  //       next({
+  //         statusCode: 400,
+  //         name: 'Bad Request',
+  //         message: 'The `suburb` instance is not valid. Details: `state` can\'t be empty or blank (value: ' + ctx.data.state + ').',
+  //       });
+  //     } else {
+  //       PostCode.findOne({where: {code: ctx.data.postCode}})
+  //         .then(function(postcode) {
+  //           if (postcode) {
+  //             ctx.data.postCodeId = postcode.id;
+  //             return State.findOne({where: {code: ctx.data.state}});
+  //           } else {
+  //             return Promise.reject({code: 400, type: 'Bad Request', message: `postCode ${ctx.data.postCode} does not exists`});
+  //           }
+  //         })
+  //         .then(function(state) {
+  //           if (state) {
+  //             ctx.data.stateId = state.id;
+  //             delete ctx.data.postCode;
+  //             delete ctx.data.state;
+  //             next();
+  //           } else {
+  //             return Promise.reject({code: 400, type: 'Bad Request', message: `state ${ctx.data.state} does not exists`});
+  //           }
+  //         })
+  //         .catch(function(e) {
+  //           next({
+  //             statusCode: e.code || '500',
+  //             name: e.type || 'Internal Error',
+  //             message: `${e.message}`,
+  //           });
+  //         });
+  //     }
+  //   }
+  // });
 
   Suburb.afterRemote('*', function(ctx, results, next) {
     const PostCode = app.models.PostCode;
