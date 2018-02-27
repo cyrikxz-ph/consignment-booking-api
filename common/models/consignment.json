@@ -1,0 +1,145 @@
+{
+  "name": "consignment",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "consignmentId": {
+      "type": "string"
+    },
+    "referenceNo": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "sendFromContactName": {
+      "type": "string"
+    },
+    "sendFromBusinessName": {
+      "type": "string"
+    },
+    "sendFromEmail": {
+      "type": "string"
+    },
+    "sendFromPhoneNumber": {
+      "type": "string"
+    },
+    "sendFromMobileNumber": {
+      "type": "string"
+    },
+    "sendFromAddressLine1": {
+      "type": "string"
+    },
+    "sendFromAddressLine2": {
+      "type": "string"
+    },
+    "sendFromAddressLine3": {
+      "type": "string"
+    },
+    "sendFromSuburb": {
+      "type": "string"
+    },
+    "sendFromPostCode": {
+      "type": "string"
+    },
+    "sendFromState": {
+      "type": "string"
+    },
+    "sendFromSaveDefault": {
+      "type": "string",
+      "default": false
+    },
+    "deliverToContactName": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "deliverToBusinessName": {
+      "type": "string"
+    },
+    "deliverToEmail": {
+      "type": "string"
+    },
+    "deliverToPhoneNumber": {
+      "type": "string"
+    },
+    "deliverToMobileNumber": {
+      "type": "string"
+    },
+    "deliverToAddressLine1": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "deliverToAddressLine2": {
+      "type": "string"
+    },
+    "deliverToAddressLine3": {
+      "type": "string"
+    },
+    "deliverToSuburb": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "deliverToPostCode": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "deliverToState": {
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    "deliverToAdditionalInfo": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "details": {
+      "type": "hasMany",
+      "model": "consignmentDetail",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "import"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

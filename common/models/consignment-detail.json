@@ -1,0 +1,45 @@
+{
+  "name": "consignmentDetail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "specialInstruction": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "length": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "width": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "height": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "isDangerousGoods": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

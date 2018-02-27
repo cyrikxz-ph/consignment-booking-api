@@ -130,6 +130,11 @@
       "type": "hasMany",
       "model": "user",
       "foreignKey": "companyId"
+    },
+    "consignments": {
+      "type": "hasMany",
+      "model": "consignment",
+      "foreignKey": ""
     }
   },
   "acls": [

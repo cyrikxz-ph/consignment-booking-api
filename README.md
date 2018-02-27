@@ -1,7 +1,7 @@
-Consegname Shipment Booking API
+Consegname's Consignment Booking API
 -----
 
-API module of shipment booking app of ConsegnaMe
+API module of Consignment booking app of ConsegnaMe
 
 Install:
 ```

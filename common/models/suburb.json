@@ -1,6 +1,7 @@
 {
   "name": "suburb",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
   "indexes": {
     "suburb_postcode_state_index": {

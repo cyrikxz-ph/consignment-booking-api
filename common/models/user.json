@@ -1,11 +1,13 @@
 {
   "name": "user",
   "base": "User",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true,
     "caseSensitiveEmail": false
   },
+  "restrictResetPasswordTokenScope": true,
   "properties": {
     "firstName": {
       "type": "string",
@@ -32,7 +34,33 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "statusCheck"
     }
   ],
-  "methods": {}
+  "methods": {
+    "statusCheck": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "status",
+          "type": "string",
+          "root": false,
+          "description": ""
+        }
+      ],
+      "description": "Check application status",
+      "http": [
+        {
+          "path": "/status-check",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }

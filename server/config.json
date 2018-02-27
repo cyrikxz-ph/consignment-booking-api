@@ -1,6 +1,8 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
+  "tmpDir": "./tmp",
+  "uploadDir": "./tmp/uploads",
   "port": 3000,
   "remoting": {
     "context": false,

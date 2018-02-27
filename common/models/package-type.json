@@ -1,12 +1,13 @@
 {
   "name": "packageType",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "code": {
+    "packageClass": {
       "type": "string",
       "required": true
     },
@@ -14,13 +15,18 @@
       "type": "string",
       "required": true
     },
-    "weightMin": {
+    "weightLimit": {
       "type": "number",
       "required": true
     },
-    "weightMax": {
-      "type": "number",
-      "required": true
+    "defaultHeight": {
+      "type": "number"
+    },
+    "defaultWidth": {
+      "type": "number"
+    },
+    "defaultLength": {
+      "type": "number"
     },
     "active": {
       "type": "boolean",

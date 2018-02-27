@@ -40,7 +40,7 @@
   },
   "Role": {
     "dataSource": "mongoDS",
-    "public": true
+    "public": false
   },
   "company": {
     "dataSource": "mongoDS",
@@ -65,5 +65,13 @@
   "packageType": {
     "dataSource": "mongoDS",
     "public": true
+  },
+  "consignment": {
+    "dataSource": "mongoDS",
+    "public": true
+  },
+  "consignmentDetail": {
+    "dataSource": "mongoDS",
+    "public": false
   }
 }

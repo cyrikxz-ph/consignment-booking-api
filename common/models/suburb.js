@@ -1,5 +1,9 @@
 'use strict';
 const _ = require('lodash');
+var multiparty = require('multiparty');
+var path = require('path');
+var fs = require('fs');
+var config = require('../../server/config.json');
 
 module.exports = function(Suburb) {
   const app = require('../../server/server');
@@ -50,7 +54,10 @@ module.exports = function(Suburb) {
               ctx.instance.postCodeId = postcode.id;
               return State.findOne({where: {code: ctx.instance.state}});
             } else {
-              return Promise.reject({code: 400, type: 'Bad Request', message: `postCode ${ctx.instance.postCode} does not exists`});
+              return Promise.reject({
+                code: 400,
+                type: 'Bad Request', message: `postCode ${ctx.instance.postCode} does not exists`,
+              });
             }
           })
           .then(function(state) {
@@ -161,5 +168,38 @@ module.exports = function(Suburb) {
     } else {
       next();
     }
+  });
+
+  const getFileFromRequest = (req) => new Promise((resolve, reject) => {
+    const form = new multiparty.Form({
+      uploadDir: config.tmpDir,
+    });
+    form.parse(req, (err, fields, files) => {
+      if (err) reject(err);
+      const file = files['file'][0]; // get the file from the returned files object
+      if (!file) Promise.reject('File was not found in form data.');
+      else resolve(file);
+    });
+  });
+
+  Suburb.importConsignment = function(req, cb) {
+    getFileFromRequest(req)
+      .then(function(file) {
+        var data = fs.readFileSync(file.path, 'utf8');
+        data.split('\n').map(function(line, idx) {
+          console.log(idx + ' - ' + line);
+        });
+        cb(null, 'Test');
+      });
+  };
+
+  Suburb.remoteMethod('importConsignment', {
+    accepts: [
+      {
+        arg: 'req', type: 'object', http: {source: 'req'},
+      }, // pass the request object to remote method
+    ],
+    returns: {root: true, type: 'object'},
+    http: {path: '/import', verb: 'post'},
   });
 };

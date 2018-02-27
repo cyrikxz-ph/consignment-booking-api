@@ -2,6 +2,24 @@
 const _ = require('lodash');
 
 module.exports = function(Company) {
+  /* consignments relation */
+  Company.disableRemoteMethodByName('prototype.__findById__consignments');
+  Company.disableRemoteMethodByName('prototype.__count__consignments');
+  Company.disableRemoteMethodByName('prototype.__create__consignments');
+  Company.disableRemoteMethodByName('prototype.__delete__consignments');
+  Company.disableRemoteMethodByName('prototype.__destroyById__consignments');
+  Company.disableRemoteMethodByName('prototype.__findById__consignments');
+  Company.disableRemoteMethodByName('prototype.__get__consignments');
+  Company.disableRemoteMethodByName('prototype.__updateById__consignments');
+  /* users relation */
+  Company.disableRemoteMethodByName('prototype.__findById__users');
+  Company.disableRemoteMethodByName('prototype.__count__users');
+  Company.disableRemoteMethodByName('prototype.__create__users');
+  Company.disableRemoteMethodByName('prototype.__delete__users');
+  Company.disableRemoteMethodByName('prototype.__destroyById__users');
+  Company.disableRemoteMethodByName('prototype.__findById__users');
+  Company.disableRemoteMethodByName('prototype.__get__users');
+  Company.disableRemoteMethodByName('prototype.__updateById__users');
   // Company.disableRemoteMethodByName('prototype.updateAttributes');
   // Company.disableRemoteMethodByName('prototype.patchAttributes');
   // Company.disableRemoteMethodByName('create');

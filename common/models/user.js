@@ -46,6 +46,12 @@ module.exports = function(User) {
   //   next();
   // });
 
+  User.statusCheck = function(callback) {
+    var status = 'ok';
+    // TODO
+    callback(null, status);
+  };
+
   User.afterRemote('*', function(ctx, results, next) {
     const Role = app.models.Role;
     const Company = app.models.Company;
